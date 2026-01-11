@@ -71,7 +71,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* CRITICAL: Container must be flex column */
         .chatbot-container {
             position: fixed;
             bottom: 115px;
@@ -203,7 +202,6 @@
             fill: white;
         }
 
-        /* CRITICAL: Messages area must flex-grow and scroll */
         .chatbot-messages {
             flex: 1 1 0;
             overflow-y: auto;
@@ -631,6 +629,7 @@
             }
         }
 
+        /* UPDATED: Mobile Responsive */
         @media (max-width: 768px) {
             .chatbot-container {
                 width: 100%;
@@ -649,11 +648,213 @@
                 height: 60px;
             }
 
+            .chatbot-toggle::before {
+                font-size: 28px;
+            }
+
+            .chatbot-header {
+                padding: 16px 18px;
+            }
+
+            .chatbot-avatar {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+
+            .chatbot-info h3 {
+                font-size: 15px;
+            }
+
+            .chatbot-info p {
+                font-size: 11.5px;
+            }
+
+            .header-right {
+                gap: 10px;
+            }
+
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+            }
+
+            .theme-toggle svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .chatbot-messages {
+                padding: 18px 16px;
+            }
+
+            .message {
+                margin-bottom: 16px;
+            }
+
+            .message-avatar {
+                width: 34px;
+                height: 34px;
+                font-size: 18px;
+            }
+
             .message-content {
                 max-width: 78%;
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+
+            .quick-actions,
+            .specialist-panel {
+                padding: 12px 16px;
+            }
+
+            .specialist-bots {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .specialist-bot {
+                padding: 10px 6px;
+            }
+
+            .specialist-bot-icon {
+                font-size: 26px;
+                margin-bottom: 4px;
+            }
+
+            .specialist-bot-name {
+                font-size: 10.5px;
+            }
+
+            .quick-action-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            .chatbot-input {
+                padding: 14px 16px;
+            }
+
+            .chatbot-input input {
+                padding: 11px 16px;
+                font-size: 14px;
+            }
+
+            .send-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .send-btn svg {
+                width: 18px;
+                height: 18px;
             }
         }
 
+        /* Extra Small Screens */
+        @media (max-width: 480px) {
+            .chatbot-header {
+                padding: 14px 16px;
+            }
+
+            .chatbot-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .chatbot-info h3 {
+                font-size: 14px;
+            }
+
+            .chatbot-info p {
+                font-size: 11px;
+            }
+
+            .theme-toggle {
+                width: 30px;
+                height: 30px;
+            }
+
+            .chatbot-status {
+                width: 8px;
+                height: 8px;
+            }
+
+            .message-content {
+                max-width: 80%;
+                font-size: 13.5px;
+                padding: 11px 14px;
+            }
+
+            .message-avatar {
+                width: 32px;
+                height: 32px;
+                font-size: 17px;
+            }
+
+            .specialist-bots {
+                gap: 6px;
+            }
+
+            .specialist-bot {
+                padding: 8px 4px;
+            }
+
+            .specialist-bot-icon {
+                font-size: 24px;
+            }
+
+            .specialist-bot-name {
+                font-size: 10px;
+            }
+
+            .quick-action-btn {
+                padding: 7px 12px;
+                font-size: 11.5px;
+            }
+
+            .chatbot-input {
+                padding: 12px 14px;
+            }
+
+            .chatbot-input input {
+                padding: 10px 14px;
+                font-size: 13.5px;
+            }
+
+            .send-btn {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        /* Landscape Mode Fix */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .chatbot-container {
+                max-height: 100vh;
+            }
+
+            .chatbot-messages {
+                padding: 12px 16px;
+            }
+
+            .quick-actions,
+            .specialist-panel {
+                padding: 10px 16px;
+            }
+
+            .specialist-bots {
+                max-height: 150px;
+            }
+
+            .quick-actions-buttons {
+                max-height: 80px;
+            }
+        }
+
+        /* Desktop Large Screens */
         @media (min-width: 1400px) {
             .chatbot-container {
                 width: 440px;
@@ -796,18 +997,15 @@
             }
         });
 
-        // UPDATED: Toggle section with mutual exclusion (only one open at a time)
         function toggleSection(sectionId) {
             const section = document.getElementById(sectionId);
             const wasCollapsed = section.classList.contains('collapsed');
             
-            // Close all accordion sections
             const allSections = document.querySelectorAll('.quick-actions, .specialist-panel');
             allSections.forEach(s => {
                 s.classList.add('collapsed');
             });
             
-            // Open the clicked section only if it was previously closed
             if (wasCollapsed) {
                 section.classList.remove('collapsed');
             }
